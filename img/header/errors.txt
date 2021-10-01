@@ -1,0 +1,1 @@
+[2021-7-5 15:31:41] layer "Asset 1logo2.g": Unsupported extension: g

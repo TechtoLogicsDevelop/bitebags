@@ -1,0 +1,822 @@
+<html>
+
+<head>
+    <title>
+        Parallax
+    </title>
+    <link href="https://fonts.googleapis.com/css2?family=Viga&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .active {
+            background-color: yellow;
+        }
+
+        .section {
+            width: 100%;
+            height: 100vh;
+            /* display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center; */
+        }
+
+        /* 
+        p {
+            font-size: 200%;
+            font-family: monospace;
+            font-weight: bold;
+        } */
+
+        #sec1 {
+            background-color: #fff;
+        }
+
+        #sec2 {
+            background-color: #fff;
+        }
+
+        #sec3 {
+            background-color: #fff;
+        }
+
+        @import url(https://fonts.googleapis.com/css?family=Montserrat);
+
+
+
+        .right {
+            border-bottom-right-radius: 370px;
+            border-top-right-radius: 370px;
+            background-color: #909090;
+            height: 46em;
+            width: 22em;
+        }
+
+        #background {
+            position: absolute;
+            z-index: 0;
+            background: transparent;
+            display: block;
+            min-height: 50%;
+            min-width: 50%;
+            color: yellow;
+            margin-left: 18em;
+            top: 4em;
+        }
+
+        #content {
+            position: absolute;
+            z-index: 1;
+        }
+
+        #bg-text {
+            font-size: 90px;
+            color: #ececec;
+            transform: rotate(360deg);
+            -webkit-transform: rotate(360deg);
+            text-transform: uppercase;
+            text-align: center;
+            font-weight: 900;
+            /* color:lightgrey;
+    font-size:120px;
+    transform:rotate(360deg);
+    -webkit-transform:rotate(360deg); */
+        }
+
+        .loader {
+            text-align: center;
+        }
+
+        .loader span {
+            display: inline-block;
+            width: 30px;
+            height: 210px;
+            margin: -280px 40px 54px -34px;
+
+            -webkit-animation: loader 10s infinite linear;
+            -moz-animation: loader 10s infinite linear;
+        }
+
+        .loader span:nth-child(5n+5) {
+
+            -webkit-animation-delay: 1.3s;
+            -moz-animation-delay: 1.3s;
+            width: 30px;
+            height: 210px;
+            background: url("img/header/butter-puffs-2.png") no-repeat;
+            background-size: contain;
+
+        }
+
+        .loader span:nth-child(3n+2) {
+
+            -webkit-animation-delay: 1.5s;
+            -moz-animation-delay: 1.5s;
+            width: 30px;
+            height: 210px;
+            background: url("img/header/butter-puffs-4.png") no-repeat;
+            background-size: contain;
+
+        }
+
+        .loader span:nth-child(2n+5) {
+
+            -webkit-animation-delay: 1.7s;
+            -moz-animation-delay: 1.7s;
+            width: 30px;
+            height: 210px;
+            background: url("img/header/butter-puffs-4.png") no-repeat;
+            background-size: contain;
+        }
+
+        .loader span:nth-child(3n+10) {
+
+            -webkit-animation-delay: 2.7s;
+            -moz-animation-delay: 2.7s;
+            width: 30px;
+            height: 210px;
+            background: url("img/header/butter-puffs-6.png") no-repeat;
+            background-size: contain;
+        }
+
+        .loader span:nth-child(7n+2) {
+            width: 30px;
+            height: 210px;
+            background: url("img/header/butter-puffs-7.png") no-repeat;
+            background-size: contain;
+            -webkit-animation-delay: 3.5s;
+            -moz-animation-delay: 3.5s;
+        }
+
+        .loader span:nth-child(4n+5) {
+            width: 30px;
+            height: 210px;
+            background: url("img/header/butter-puffs-4.png") no-repeat;
+            background-size: contain;
+            -webkit-animation-delay: 5.5s;
+            -moz-animation-delay: 5.5s;
+        }
+
+        .loader span:nth-child(3n+7) {
+            width: 30px;
+            height: 210px;
+            background: url("img/header/butter-puffs-1.png") no-repeat;
+            background-size: contain;
+            -webkit-animation-delay: 8s;
+            -moz-animation-delay: 8s;
+        }
+
+        @-webkit-keyframes loader {
+            0% {
+                width: 80px;
+                height: 80px;
+                opacity: 1;
+                -webkit-transform: translate(0, 0px) rotateZ(0deg);
+            }
+
+            75% {
+                width: 80px;
+                height: 80px;
+                opacity: 1;
+                -webkit-transform: translate(3px, 600px) rotateZ(270deg);
+            }
+
+            100% {
+                width: 80px;
+                height: 80px;
+                opacity: 0;
+                -webkit-transform: translate(5px, 800px) rotateZ(360deg);
+            }
+        }
+
+        @-moz-keyframes loader {
+            0% {
+                width: 80px;
+                height: 80px;
+                opacity: 1;
+                -webkit-transform: translate(0, 0px) rotateZ(0deg);
+            }
+
+            75% {
+                width: 80px;
+                height: 80px;
+                opacity: 1;
+                -webkit-transform: translate(3px, 600px) rotateZ(270deg);
+            }
+
+            100% {
+                width: 80px;
+                height: 80px;
+                opacity: 0;
+                -webkit-transform: translate(5px, 800px) rotateZ(360deg);
+            }
+        }
+
+        .myGallery {
+            display: grid;
+            grid-gap: 10px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        }
+
+        .myGallery img {
+            width: 100%;
+        }
+
+        /*
+  And here are some declarations for the image caption.
+  Just hover over one of the last 5 images to see it.
+*/
+
+        .myGallery .item {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .myGallery .item img {
+            vertical-align: middle;
+        }
+
+        .myGallery .caption {
+            margin: 0;
+            padding: 1em;
+            position: absolute;
+            z-index: 1;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            max-height: 100%;
+            overflow: auto;
+            box-sizing: border-box;
+            transition: transform 0.5s;
+            transform: translateY(100%);
+            background: rgba(0, 0, 0, 0.7);
+            color: rgb(255, 255, 255);
+        }
+
+        .myGallery .item:hover .caption {
+            transform: translateY(0%);
+        }
+
+        /*
+  The rest is only styling for this example page
+*/
+        .myGallery {
+            font-size: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="">
+        <section class="section" id="sec1">
+            <!-- <div class="content-wrapper">
+      <p class="content-title">Full Page Parallax Effect</p>
+      <p class="content-subtitle">Scroll down and up to see the effect!</p>
+    </div> -->
+
+            <div class="loader">
+                <span style="background: url('img/header/butter-puffs-1.png');"></span>
+                <span style="background: url('img/header/butter-puffs-1.png');"></span>
+                <span style="img/header/butter-puffs-1.png"></span>
+                <span style="img/header/butter-puffs-3.png"></span>
+                <span style="img/header/butter-puffs-6.png"></span>
+                <span style="img/header/butter-puffs-5.png"></span>
+                <span style="img/header/butter-puffs-7.png"></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <!-- <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span> -->
+            </div>
+            <div class="top_section d-flex justify-content-center align-items-center flex-column">
+                <div class="d-flex justify-content-center" style="position:absolute;top:
+                0em;">
+                    <div class="p-3">
+                        <img src="img/header/logo.png" alt="" style="width: 140px;">
+                    </div>
+                </div>
+                <div class="social_media_cons">
+                    <div class="d-flex flex-column">
+                        <img src="img/header/social-media-top-1.png" alt="" style="width:30px">
+                        <img src="img/header/social-media-top-2.png" class="mt-2" alt="" style="width:30px">
+                        <img src="img/header/social-media-top-3.png" alt="" class="mt-2" style="width:30px">
+                    </div>
+                </div>
+                <div class="social_media_links_line">
+                    <img src="img/social-media-bottom-line.png" alt="" srcset="">
+                </div>
+                <div class="text-center" style="position: absolute;top: 50%;">
+                    <span class="top_name">CHIKPEA PUFFS</span>
+                </div>
+            </div>
+        </section>
+        <section class="background d-flex align-items-center section" id="sec2">
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <div class="right">
+                        <div class="how_we_make">
+                            <span>HOW WE MAKE</span>
+                        </div>
+                        <div style="    position: absolute;
+          ;">
+                            <img src="img/cercle-2c.png" alt="" class="curve" style="">
+                        </div>
+                        <div id="background">
+                            <p id="bg-text">Goodness <br> in <br> every bite</p>
+                        </div>
+                        <div style="position:relative">
+                            <div class="ss flavour_1" id="1"><img src="img/howwemake/flavour-1.png" alt=""
+                                    class="ingredients"></div>
+                            <div class="ss flavour_2" id="2"><img src="img/howwemake/flavour-2.png" alt=""
+                                    class="ingredients"></div>
+                            <div class="ss flavour_3" id="3"><img src="img/howwemake/flavour-3.png" alt=""
+                                    class="ingredients"> </div>
+                            <div class="ss flavour_4" id="4"><img src="img/howwemake/flavour-4.png" alt=""
+                                    class="ingredients"></div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="mt-5">
+                        <span class="section_2_heading">FINEST INGREDIENTS SOURCED <br class="break"> FROM LOCAL
+                            FARMS</span>
+                        <hr class="down_line">
+                    </div>
+                    <div class="ingredients_sec">
+                        <div class="sshide" id="ss1">
+                            <span class="sub_heading">CHICKPEAS</span>
+                            <hr class="down_line">
+                            <div class="prd_item_description">
+                                <p class="description_item">Chickpeas, otherwise known as garbanzo beans,
+                                    are part of the legume family and loaded with nutrition. The USDA actually
+                                    recommends three cups
+                                    of legumes a week, and chickpeas fit right in.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="sshide" id="ss2">
+                            <span class="sub_heading">ALMOND PUFFS</span>
+                            <hr class="down_line">
+                            <div style="width: 74%;">
+                                <p class="description_item">Lorem Ipsum is simply dummy text of the printing and
+                                    typesetting industry.
+                                    Lorem
+                                    Ipsum has been the
+                                    industry's standard
+                                    dummy text ever since the 1500s, when an unknown printer took a galley bof type and
+                                    scrambled it
+
+                                    book.</p>
+                            </div>
+                        </div>
+
+                        <div class="sshide" id="ss3">
+                            <span class="sub_heading">ONION GARLIC</span>
+                            <hr class="down_line">
+                            <div style="width: 74%;">
+                                <p class="description_item">Lorem Ipsum is simply dummy text of the printing and
+                                    typesetting industry.
+                                    Lorem
+                                    Ipsum has been the
+                                    industry's standard
+                                    dummy text ever since the 1500s, when an unknown printer took a galley bof type and
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="sshide" id="ss4">
+                            <span class="sub_heading">CHICKPEAS 4</span>
+                            <hr class="down_line">
+                            <div style="width: 74%;">
+                                <p class="description_item">Lorem Ipsum is simply dummy text of the printing and
+                                    typesetting industry.
+                                    Lorem
+                                    Ipsum has been the
+                                    industry's standard
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section" id="sec3">
+            <!-- <div class="content-wrapper">
+        <p class="content-title">Etiam consequat lectus.</p>
+        <p class="content-subtitle">Nullam tristique urna sed tellus ornare congue. Etiam vitae erat at nibh aliquam
+          dapibus.</p>
+      </div> -->
+            <div class="butter_puffs_info">
+                <div class="d-flex justify-content-center mb-5">
+                    <div class="text-center">
+                        <h3 class="prod_heading">BUTTER PUFFS</h3>
+                        <hr class="hr2">
+                    </div>
+                </div>
+                <div class="row d-flex">
+                    <div class="col-md-5">
+                        <div class="ml-5"><img src="img/products/animation-product-1.png" alt="" class="star1"
+                                width="75%"></div>
+                    </div>
+                    <div class="col-md-7">
+                        <div>
+                            <h2 id="in" class="prod_name">
+                                <span class="orange">Almond Butter</span>
+                            </h2>
+                            <div class="inner_prd_content">
+                                <p id="out">Content1 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                    Doloremque sunt cumque
+                                    pariatur
+                                    sint dignissimos odio sit facilis porro veritatis earum itaque similique voluptatem
+                                    dolores est ipsum,
+                                    sequi
+                                    non temporibus,quae. </p>
+                                <div class="d-flex justify-content-center">
+                                    <div class="d-flex justify-content-between" style="width: 50%;">
+                                        <div>
+                                            <img src="img/header/5-gms.png" alt="" class="product_features">
+                                        </div>
+                                        <div>
+                                            <img src="img/header/gluten.png" alt="" class="product_features">
+                                        </div>
+                                        <div>
+                                            <img src="img/header/no-artificial.png" alt="" class="product_features1">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="thumb">
+                            <a href="#para1"><img id="btn1" class="btn" src="img/products/animation-product-1.png"
+                                    onclick="imgSlider('img/products/almond Butter Puffs.gif');"> </a>
+                            <a href="#para2"><img id="btn2" class="btn" src="img/products/animation-product-2.png"
+                                    onclick="imgSlider('img/products/animation-product-2.png');"> </a>
+                            <a href="#para3"><img id="btn3" class="btn" src="img/products/animation-product-3.png"
+                                    onclick="imgSlider('img/products/animation-product-3.png');"> </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <section class="section" id="sec4">
+            <div class="container-fluid banner">
+                <span>#GUILTFREESNACKING</span>
+            </div>
+            <div class="myGallery">
+                <img src="img/feed_section/instagram-1.png" style="">
+                <div class="p-3 d-flex justify-content-center align-items-center text-center feed_1">
+                    <div class="feed_section">
+                        <h2>clean</h2>
+                        <h2>snacking</h2>
+                    </div>
+                </div>
+                <img src="img/feed_section/instagram-2.png" style="">
+                <div class="p-3 d-flex justify-content-center align-items-center text-center feed_2">
+                    <div class="feed_section">
+                        <h2>all</h2>
+                        <h2>day</h2>
+                        <h2>snacking</h2>
+                    </div>
+                </div>
+                <img src="img/feed_section/instagram-3.png" style="">
+                <div class="p-3 d-flex justify-content-center align-items-center text-center feed_3">
+                    <div class="feed_section">
+                        <h2>goodness</h2>
+                        <h2>in every</h2>
+                        <h2>bite</h2>
+                    </div>
+                </div>
+                <img src="img/feed_section/instagram-4.png" style="">
+                <div class="p-3 d-flex justify-content-center align-items-center text-center feed_4">
+                    <div class="feed_section">
+                        <h2>this</h2>
+                        <h2>junk is</h2>
+                        <h2>good</h2>
+                    </div>
+                </div>
+                <img src="img/feed_section/instagram-2.png" style="">
+                <div class="p-3 d-flex justify-content-center align-items-center text-center feed_5">
+                    <div class="feed_section">
+                        <h2>this</h2>
+                        <h2>junk is</h2>
+                        <h2>good</h2>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section" id="sec5">
+            <div class="product_section mt-5 pb-5" style="position:relative ;">
+                <div class="d-flex justify-content-center">
+                    <div class="text-center buy_online_top_div">
+                        <h3 class="prod_heading">BUY ONLINE</h3>
+                        <hr class="hr2">
+                    </div>
+                </div>
+                <div id="background">
+                    <p id="bg-text">Goodness <br> in <br> every bite</p>
+                </div>
+                <div class="d-flex justify-content-center mt-5" style="position: relative;">
+                    <div class="d-flex justify-content-center" style="width: 60%;">
+                        <div class="d-flex align-items-end justify-content-around" style="width: 100%;flex-wrap: wrap;">
+                            <div class="text-center product_packet product_1">
+                                <img src="img/prod_lists/product-1.png" alt="" class="items">
+                                <div class="text-center"><button class="buy_now_btn mt-3">buy now</button></div>
+                            </div>
+                            <button class="buy_now_btn mt-3">buy now</button>
+                            <div class="text-center product_packet product_2">
+                                <img src="img/prod_lists/product-4.png" alt="" class="one_item">
+                                <br>
+                                <button class="buy_now_btn mt-3">buy now</button>
+                            </div>
+                            <div class="text-center product_packet product_3">
+                                <img src="img/prod_lists/product-3.png" alt="" class="items">
+                                <br>
+                                <button class="buy_now_btn mt-3">buy now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section" id="sec6">
+            <div class="d-flex justify-content-center mt-5">
+                <div class="product_features_div" style="flex-wrap: wrap;">
+                    <div class="col-6 col-lg-2 text-center">
+                        <img src="img/features/Best-Quality.png" alt="" class="feature_icons">
+                        <div class="text-center features_top_heading">
+                            <span>BEST <br> QUALITY
+                            </span>
+                            <p> is simply dummy text of the printing and</p>
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg-2 text-center">
+                        <img src="img/features/its-baked.png" alt="" class="feature_icons">
+                        <div class="text-center features_top_heading">
+                            <span>ITS <br> BAKED <br>
+                            </span>
+                            <p> is simply dummy text of the printing and</p>
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg-2 text-center">
+                        <img src="img/features/5-gms2.png" alt="" class="feature_icons">
+                        <div class="text-center features_top_heading">
+                            <span>5 GMS <br> PROTEIN
+                            </span>
+                            <p> is simply dummy text of the printing and</p>
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg-2 text-center">
+                        <img src="img/features/gluten2-free.png" alt="" class="feature_icons">
+                        <div class="text-center features_top_heading">
+                            <span>GLUTEN <br> FREE
+                            </span>
+                            <p> is simply dummy text of the printing and</p>
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg-2 text-center">
+                        <img src="img/features/1no-artificial.png" alt="" class="feature_icons">
+                        <div class="text-center features_top_heading">
+                            <span>NO ARTIFICIAL <br> INGREDIENTS
+                            </span>
+                            <p>is simply dummy text of the printing and</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="footer_sec">
+                <!-- Social media icons line Start -->
+                <div class="footer_divs">
+                    <div class="footer_redirection">
+                        <div class="text-center pt-5 pb-3 footer_tagline">
+                            <h3>want to know more</h3>
+                            <div class="footer_line">
+                                <h3>follow us</h3>
+                            </div>
+                        </div>
+                        <div class="row d-flex justify-content-center mb-4">
+                            <div class="col-lg-2  justify-content-md-around d-flex">
+                                <a href="https://facebook.com/" class="sm-button">
+                                    <div class="social_media_icons">
+                                        <i class="fa fa-facebook-f footer_icons"> </i>
+                                    </div>
+                                </a>
+                                <a href="https://instagram.com/" class="sm-button ">
+                                    <div class="social_media_icons">
+                                        <i class="fa fa-whatsapp footer_icons"> </i>
+                                    </div>
+                                </a>
+                                <a href="https://instagram.com/" class="sm-button">
+                                    <div class="social_media_icons">
+                                        <i class="fa fa-instagram footer_icons"> </i>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- <div class="d-flex footer_redirection text-white justify-content-center">
+          <div class=" text-center">
+            <a href="" class="footer_links">
+              <span>DISTRIBUTION</span>
+            </a>
+          </div>
+          <div class="col-6 col-lg-2 text-center">
+            <a href="" class="footer_links">
+              <span>CONTACT US</span>
+            </a>
+          </div>
+          <div class="col-6 col-lg-2 text-center">
+            <a href="text-center" class="footer_links">
+              <span class="text-center">FAQ</span>
+            </a>
+          </div>
+          <div class="col-6 col-lg-2 text-center">
+            <a href="" class="footer_links">
+              <span>REFER FRIEND</span>
+            </a>
+          </div>
+        </div> -->
+                        <div class="d-flex justify-content-center">
+                            <div style="display:flex;width: 48%;justify-content: space-evenly;">
+                                <div class=" text-center">
+                                    <a href="" class="footer_links">
+                                        <span>DISTRIBUTION</span>
+                                    </a>
+                                </div>
+                                <div class=" text-center">
+                                    <a href="" class="footer_links">
+                                        <span>CONTACT US</span>
+                                    </a>
+                                </div>
+                                <div class=" text-center">
+                                    <a href="" class="footer_links">
+                                        <span>FAQ</span>
+                                    </a>
+                                </div>
+                                <div class=" text-center">
+                                    <a href="" class="footer_links">
+                                        <span>REFER FRIEND</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-lg-10">
+                                <div class="d-flex justify-content-center">
+                                    <hr
+                                        style="background-color: #fbfbfb;width:55%;margin-top: 7px;margin-bottom: 7px;border: 1px solid #fff;">
+                                </div>
+                                <div class="d-flex justify-content-center"
+                                    style="padding-bottom: 12px;padding-top: 5px;">
+                                    <div style="border-right: 1px solid red;padding-right: 15px;padding-left: 10px;">
+                                        <span class="contact_info">901-947 SOUTH DRIVE YELANKA BANGALORE, KARNATAKA
+                                            INDIA</span>
+                                    </div>
+                                    <div style="border-right: 1px solid red;padding-right: 15px;padding-left: 15px;">
+                                        <span class="contact_info">TELEPHONE : 080-3322144</span>
+                                    </div>
+                                    <div style="padding-left: 15px;">
+                                        <span class="contact_info">EMAIL : INFO@BYOND.COM</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <hr class="footer_hr"> -->
+                    </div>
+                </div>
+                <!-- copyright area -->
+                <div class="copy_rightsec text-white pt-0 text-center">
+                    <!-- <span>&copy; 2021 mealbags. All rights reserved.</span> -->
+                </div>
+            </footer>
+            <div class="text-center copy_rights_div">
+                Copyrights &copy; 2021 bitbags. All rights reserved
+            </div>
+        </section>
+    </div>
+    <script src="js/script.js"></script>
+    <script>
+        $(".sshide").hide();
+
+        $("#ss1").show()
+
+        $(".ss").mouseover(function (e) {
+
+            var id = $(this).attr("id");
+
+            e.preventDefault();
+
+            $(".sshide").hide();
+
+            var showid = "#ss" + id;
+
+            $(showid).show();
+
+        });
+    </script>
+    <script>
+        var text = {
+            btn1: "Content1 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque sunt cumque pariatur sint dignissimos odio sit facilis porro veritatis earum itaque similique. ",
+            btn2: "Content2 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque sunt cumque pariatur sint dignissimos odio sit facilis porro  sequi non temporibus,quae. ",
+            btn3: "Content3 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque sunt cumque pariatur sint dignissimos odio sit facilis porro veritatis dolores est ipsum, sequi non temporibus,quae. ",
+        };
+        var na = {
+            btn1: "Almond Butter",
+            btn2: "Onion",
+            btn3: "Garlic"
+        };
+        // var data = [{
+        //   id: 0,
+        //   name: "Almond Butter",
+        //   des: " Content1 Lorem ipsum dolor s",
+        //   imgUrl: "img/pro-4.png",
+        // }, {
+        //   id: 1,
+        //   name: " Peanut ",
+        //   des: "Content2 Lorem ipsum dolor s",
+        //   imgUrl: "img/pro-5.png",
+        // },
+        // {
+        //   id: 2,
+        //   name: " herbs ",
+        //   des: "Content3 Lorem ipsum dolor s",
+        //   imgUrl: "img/pro-6.png", 
+        // }]
+        $(".btn").on("click", function () {
+            var id = $(this).attr("id");
+            $("#out").text(text[id]);
+            $("#in").text(na[id]);
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            var delay = false;
+            var currentPage = 1;
+            var pageCount = $(".section").length;
+            var swipe = document.getElementsByTagName('.section');
+
+            $(document).on('mousewheel DOMMouseScroll', function (event) {
+                event.preventDefault();
+                if (delay) return;
+                delay = true;
+                setTimeout(function () { delay = false }, 100)
+
+                var wd = event.originalEvent.wheelDelta || -event.originalEvent.detail;
+                console.log(wd);
+
+                if (wd < 0) {
+                    if (currentPage < pageCount) {
+                        currentPage++;
+                    }
+                } else {
+                    if (1 < currentPage) {
+                        currentPage--;
+                    }
+                }
+
+                $('html,body').animate({
+                    scrollTop: $('#sec' + currentPage).offset().top
+                }, 700);
+
+                $('#tag' + currentPage).addClass('active');
+                for (var i = 1; i <= pageCount; i++) {
+                    if (i != currentPage) {
+                        $('#tag' + i).removeClass('active');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
